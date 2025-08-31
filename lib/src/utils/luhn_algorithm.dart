@@ -223,9 +223,4 @@ class LuhnAlgorithm {
 
     return null;
   }
-
 }
-
-
-
-

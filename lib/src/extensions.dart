@@ -1,4 +1,3 @@
-
 import 'package:flutter_form_validators/src/enums/card_type.dart';
 
 /// Extension to provide validLengths and prefixes for CreditCardType.
@@ -30,10 +29,7 @@ extension CreditCardTypeUtils on CreditCardType {
         return ['6011', '622126-622925', '644-649', '65'];
     }
   }
-
 }
-
-
 
 /// Extension methods for CreditCardType enum.
 extension CreditCardTypeExtension on CreditCardType {

@@ -1,6 +1,1 @@
-enum CreditCardType {
-  visa,
-  mastercard,
-  amex,
-  discover
-}
+enum CreditCardType { visa, mastercard, amex, discover }

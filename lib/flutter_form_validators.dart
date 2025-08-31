@@ -151,5 +151,3 @@ export 'src/utils/luhn_algorithm.dart';
 export 'src/enums/card_type.dart' show CreditCardType;
 export 'src/regex_patterns.dart';
 export 'src/extensions.dart' show CreditCardTypeExtension;
-
-
