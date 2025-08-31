@@ -156,7 +156,6 @@ class RegexPatterns {
   // pattern for time in HH:MM AM/PM 12-hour format
   static const String time12Hour = r'^(1[0-2]|0?[1-9]):[0-5][0-9] (AM|PM)$';
 
-
   // =============================================================================
   // CREDIT CARD PATTERNS
   // =============================================================================
@@ -176,7 +175,6 @@ class RegexPatterns {
   /// Generic credit card pattern (13-19 digits).
   static const String creditCard = r'^[0-9]{13,19}$';
 
-
   // =============================================================================
   // SOCIAL SECURITY & ID PATTERNS
   // =============================================================================
@@ -188,29 +186,29 @@ class RegexPatterns {
   /// US Zip code pattern (5 digits or 5+4 format).
   static const String zipCodeUS = r'^\d{5}(-\d{4})?$';
 
-  /// Ghana Zip code pattern (5 digits).  
+  /// Ghana Zip code pattern (5 digits).
   /// Ghana does not have a formal postal code system, but this pattern can be used for local codes.
   static const String zipCodeGH = r'^\d{5}$';
 
-  /// Canadian postal code pattern 
-   static const String postalCodeCA = r'^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z] ?\d[ABCEGHJ-NPRSTV-Z]\d$';
+  /// Canadian postal code pattern
+  static const String postalCodeCA =
+      r'^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z] ?\d[ABCEGHJ-NPRSTV-Z]\d$';
 
   /// UK postal code pattern.
-  static const String postalCodeUK = r'^[A-Z]{1,2}[0-9R][0-9A-Z]? [0-9][ABD-HJLNP-UW-Z]{2}$';
-
+  static const String postalCodeUK =
+      r'^[A-Z]{1,2}[0-9R][0-9A-Z]? [0-9][ABD-HJLNP-UW-Z]{2}$';
 
   // =============================================================================
   // IP ADDRESS PATTERNS
   // =============================================================================
 
   /// IPv4 address pattern.
-  static const String ipv4 = 
-    r'^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$';
-
+  static const String ipv4 =
+      r'^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$';
 
   /// IPv6 address pattern.
- /// IPv6 address pattern (comprehensive - supports all valid formats).
-  /// 
+  /// IPv6 address pattern (comprehensive - supports all valid formats).
+  ///
   /// Supports:
   /// - Full format: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
   /// - Compressed: 2001:db8:85a3::8a2e:370:7334
@@ -218,33 +216,32 @@ class RegexPatterns {
   /// - All zeros: ::
   /// - IPv4-mapped: ::ffff:192.0.2.1
   /// - IPv4-compatible: ::192.0.2.1
-  static const String ipv6 = 
-    r'^(?:'
-    r'(?:[a-fA-F0-9]{1,4}:){7}[a-fA-F0-9]{1,4}|'                    // Full format
-    r'(?:[a-fA-F0-9]{1,4}:){1,7}:|'                                  // Ending with ::
-    r'(?:[a-fA-F0-9]{1,4}:){1,6}:[a-fA-F0-9]{1,4}|'                 // One compression
-    r'(?:[a-fA-F0-9]{1,4}:){1,5}(?::[a-fA-F0-9]{1,4}){1,2}|'        // Two compressions
-    r'(?:[a-fA-F0-9]{1,4}:){1,4}(?::[a-fA-F0-9]{1,4}){1,3}|'        // Three compressions
-    r'(?:[a-fA-F0-9]{1,4}:){1,3}(?::[a-fA-F0-9]{1,4}){1,4}|'        // Four compressions
-    r'(?:[a-fA-F0-9]{1,4}:){1,2}(?::[a-fA-F0-9]{1,4}){1,5}|'        // Five compressions
-    r'[a-fA-F0-9]{1,4}:(?::[a-fA-F0-9]{1,4}){1,6}|'                 // Six compressions
-    r':(?::[a-fA-F0-9]{1,4}){1,7}|'                                  // Seven compressions
-    r'::(?:[a-fA-F0-9]{1,4}:){0,6}[a-fA-F0-9]{1,4}|'                // Starting with ::
-    r'::|'                                                           // All zeros
-    r'(?:[a-fA-F0-9]{1,4}:){6}(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|' // IPv4-mapped
-    r'::(?:[a-fA-F0-9]{1,4}:){5}(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|' // IPv4-mapped compressed
-    r'(?:[a-fA-F0-9]{1,4}:){5}:(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|'  // IPv4-mapped
-    r'(?:[a-fA-F0-9]{1,4}:){4}:(?:[a-fA-F0-9]{1,4}:)?(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|' // More IPv4-mapped variations
-    r'(?:[a-fA-F0-9]{1,4}:){3}:(?:[a-fA-F0-9]{1,4}:){0,2}(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|'
-    r'(?:[a-fA-F0-9]{1,4}:){2}:(?:[a-fA-F0-9]{1,4}:){0,3}(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|'
-    r'[a-fA-F0-9]{1,4}:(?::[a-fA-F0-9]{1,4}:){0,4}(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|'
-    r'::(?:[a-fA-F0-9]{1,4}:){0,5}(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'  // IPv4-compatible
-    r')$';
+  static const String ipv6 = r'^(?:'
+      r'(?:[a-fA-F0-9]{1,4}:){7}[a-fA-F0-9]{1,4}|' // Full format
+      r'(?:[a-fA-F0-9]{1,4}:){1,7}:|' // Ending with ::
+      r'(?:[a-fA-F0-9]{1,4}:){1,6}:[a-fA-F0-9]{1,4}|' // One compression
+      r'(?:[a-fA-F0-9]{1,4}:){1,5}(?::[a-fA-F0-9]{1,4}){1,2}|' // Two compressions
+      r'(?:[a-fA-F0-9]{1,4}:){1,4}(?::[a-fA-F0-9]{1,4}){1,3}|' // Three compressions
+      r'(?:[a-fA-F0-9]{1,4}:){1,3}(?::[a-fA-F0-9]{1,4}){1,4}|' // Four compressions
+      r'(?:[a-fA-F0-9]{1,4}:){1,2}(?::[a-fA-F0-9]{1,4}){1,5}|' // Five compressions
+      r'[a-fA-F0-9]{1,4}:(?::[a-fA-F0-9]{1,4}){1,6}|' // Six compressions
+      r':(?::[a-fA-F0-9]{1,4}){1,7}|' // Seven compressions
+      r'::(?:[a-fA-F0-9]{1,4}:){0,6}[a-fA-F0-9]{1,4}|' // Starting with ::
+      r'::|' // All zeros
+      r'(?:[a-fA-F0-9]{1,4}:){6}(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|' // IPv4-mapped
+      r'::(?:[a-fA-F0-9]{1,4}:){5}(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|' // IPv4-mapped compressed
+      r'(?:[a-fA-F0-9]{1,4}:){5}:(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|' // IPv4-mapped
+      r'(?:[a-fA-F0-9]{1,4}:){4}:(?:[a-fA-F0-9]{1,4}:)?(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|' // More IPv4-mapped variations
+      r'(?:[a-fA-F0-9]{1,4}:){3}:(?:[a-fA-F0-9]{1,4}:){0,2}(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|'
+      r'(?:[a-fA-F0-9]{1,4}:){2}:(?:[a-fA-F0-9]{1,4}:){0,3}(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|'
+      r'[a-fA-F0-9]{1,4}:(?::[a-fA-F0-9]{1,4}:){0,4}(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|'
+      r'::(?:[a-fA-F0-9]{1,4}:){0,5}(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)' // IPv4-compatible
+      r')$';
 
   /// MAC address pattern.
   static const String macAddress = r'^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$';
 
-   // =============================================================================
+  // =============================================================================
   // UTILITY METHODS
   // =============================================================================
 
@@ -265,8 +262,8 @@ class RegexPatterns {
   }
 
   /// Replaces all matches of a pattern in a string.
-  static String replaceMatches(String value, String pattern, String replacement) {
+  static String replaceMatches(
+      String value, String pattern, String replacement) {
     return value.replaceAll(RegExp(pattern), replacement);
   }
-
 }
