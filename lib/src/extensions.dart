@@ -451,113 +451,111 @@ extension StringValidationExtension on String? {
     return this!.replaceAll(RegExp(r'\s+'), '');
   }
 
-
-   /// removes all non-alphabetic characters from the string.
+  /// removes all non-alphabetic characters from the string.
   String? get alphabeticOnly {
     if (isNullOrEmpty) return this;
     return this!.replaceAll(RegExp(r'[^a-zA-Z]'), '');
   }
-  
+
   /// removes all non-numeric characters from the string.
   String? get numericOnly {
     if (isNullOrEmpty) return this;
     return this!.replaceAll(RegExp(r'[^0-9]'), '');
   }
-  
+
   /// removes all non-alphanumeric characters from the string.
   String? get alphanumericOnly {
     if (isNullOrEmpty) return this;
     return this!.replaceAll(RegExp(r'[^a-zA-Z0-9]'), '');
   }
 
-
-    /// Masks the string, showing only the first and last n characters.
-  /// 
+  /// Masks the string, showing only the first and last n characters.
+  ///
   /// Example:
   /// ```dart
   /// '1234567890'.masked(2) // '12****7890'
   /// ```
   String? masked(int visibleChars, {String maskChar = '*'}) {
     if (isNullOrEmpty || this!.length <= visibleChars * 2) return this;
-    
+
     final start = this!.substring(0, visibleChars);
     final end = this!.substring(this!.length - visibleChars);
     final middle = maskChar * (this!.length - visibleChars * 2);
-    
+
     return start + middle + end;
   }
-  
+
   /// Truncates the string to the specified length with ellipsis.
   String? truncate(int maxLength, {String ellipsis = '...'}) {
     if (isNullOrEmpty || this!.length <= maxLength) return this;
     return this!.substring(0, maxLength - ellipsis.length) + ellipsis;
   }
 
-
-
   // UTILITY METHODS
-  
+
   /// returns true if the string contains only ASCII characters.
   bool get isAscii {
     if (isNullOrEmpty) return true;
     return this!.codeUnits.every((unit) => unit <= 127);
   }
-  
+
   /// returns the number of words in the string.
   int get wordCount {
     if (isNullOrWhiteSpace) return 0;
     return this!.trim().split(RegExp(r'\s+')).length;
   }
-  
+
   /// returns true if the string is a palindrome (reads same forwards and backwards).
   bool get isPalindrome {
     if (isNullOrEmpty) return true;
     final cleaned = this!.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '');
     return cleaned == cleaned.split('').reversed.join('');
   }
-  
+
   /// returns the reverse of the string.
   String? get reversed {
     if (isNullOrEmpty) return this;
     return this!.split('').reversed.join('');
   }
-  
+
   /// returns true if the string contains the specified substring (case-insensitive).
   bool containsIgnoreCase(String substring) {
     if (isNullOrEmpty) return false;
     return this!.toLowerCase().contains(substring.toLowerCase());
   }
-  
+
   /// returns true if the string matches any of the provided patterns.
   bool matchesAny(List<String> patterns) {
     if (isNullOrEmpty) return false;
     return patterns.any((pattern) => RegExp(pattern).hasMatch(this!));
   }
-  
+
   /// returns true if the string is within the specified length range.
   bool isLengthBetween(int min, int max) {
     final length = safeLength;
     return length >= min && length <= max;
   }
-  
+
   /// Returns a formatted string for displaying sensitive data.
-  /// 
+  ///
   /// Examples:
   /// - Credit card: '1234 5678 9012 3456'
   /// - Phone: '(123) 456-7890'
   /// - SSN: '123-45-6789'
   String? formatSensitiveData(SensitiveDataType type) {
     if (isNullOrEmpty) return this;
-    
+
     final cleaned = numericOnly!;
-    
+
     switch (type) {
       case SensitiveDataType.creditCard:
         if (cleaned.length >= 13) {
-          return cleaned.replaceAllMapped(
-            RegExp(r'(\d{4})(?=\d)'),
-            (match) => '${match.group(1)} ',
-          ).trim();
+          return cleaned
+              .replaceAllMapped(
+                RegExp(r'(\d{4})(?=\d)'),
+                (match) => '${match.group(1)} ',
+              )
+              .trim();
         }
         break;
       case SensitiveDataType.phone:
@@ -571,7 +569,7 @@ extension StringValidationExtension on String? {
         }
         break;
     }
-    
+
     return this;
   }
 }
@@ -587,16 +585,16 @@ enum SensitiveDataType {
 extension StringListValidationExtensions on List<String> {
   /// Returns true if all strings in the list are valid emails.
   bool get allValidEmails => every((email) => email.isValidEmail);
-  
+
   /// Returns true if all strings in the list have content.
   bool get allHaveContent => every((str) => str.hasContent);
-  
+
   /// Returns only the valid email addresses from the list.
   List<String> get validEmails => where((email) => email.isValidEmail).toList();
-  
+
   /// Returns only the strings that have content.
   List<String> get withContent => where((str) => str.hasContent).toList();
-  
+
   /// Returns the strings that match the given pattern.
   List<String> matching(String pattern) {
     return where((str) => RegExp(pattern).hasMatch(str)).toList();
