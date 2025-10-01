@@ -583,7 +583,7 @@ enum SensitiveDataType {
   ssn,
 }
 
-/// Extension methods on List<String> for validation.
+/// Extension methods on List ``String`` for validation.
 extension StringListValidationExtensions on List<String> {
   /// Returns true if all strings in the list are valid emails.
   bool get allValidEmails => every((email) => email.isValidEmail);
