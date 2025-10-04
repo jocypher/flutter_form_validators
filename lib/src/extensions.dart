@@ -1,4 +1,5 @@
 import 'package:flutter_form_validators/flutter_form_validators.dart';
+import 'package:flutter_form_validators/src/enums/date_format.dart';
 
 /// Extension to provide validLengths and prefixes for CreditCardType.
 extension CreditCardTypeUtils on CreditCardType {
@@ -598,5 +599,30 @@ extension StringListValidationExtensions on List<String> {
   /// Returns the strings that match the given pattern.
   List<String> matching(String pattern) {
     return where((str) => RegExp(pattern).hasMatch(str)).toList();
+  }
+}
+
+/// Extension for DateFormat enum.
+extension DateFormatExtension on DateFormat {
+  String get pattern {
+    switch (this) {
+      case DateFormat.ymd:
+        return 'YYYY-MM-DD';
+      case DateFormat.mdy:
+        return 'MM/DD/YYYY';
+      case DateFormat.dmy:
+        return 'DD/MM/YYYY';
+    }
+  }
+
+  String get regexPattern {
+    switch (this) {
+      case DateFormat.ymd:
+        return RegexPatterns.dateYMD;
+      case DateFormat.mdy:
+        return RegexPatterns.dateMDY;
+      case DateFormat.dmy:
+        return RegexPatterns.dateDMY;
+    }
   }
 }
