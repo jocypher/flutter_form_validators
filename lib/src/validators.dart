@@ -1,4 +1,5 @@
 import 'package:flutter_form_validators/flutter_form_validators.dart';
+import 'package:flutter_form_validators/src/enums/countries.dart';
 import 'package:flutter_form_validators/src/enums/date_format.dart';
 import 'package:flutter_form_validators/src/enums/phone_regions.dart';
 import 'package:flutter_form_validators/src/utils/validator_utilities.dart';
@@ -482,6 +483,47 @@ class Validators {
       }
 
       return null;
+    };
+  }
+
+  /// Validates postal codes for different countries.
+  ///
+  /// Example:
+  /// ```dart
+  /// TextFormField(
+  ///   validator: Validators.postalCode(country: Country.canada),
+  /// )
+  /// ```
+  static Validator postalCode({
+    Countries country = Countries.us,
+    String? message,
+  }) {
+    return (String? value) {
+      if (ValidatorUtilities.isEmpty(value)) return null;
+
+      String pattern;
+      String countryName;
+
+      switch (country) {
+        case Countries.us:
+          pattern = RegexPatterns.zipCodeUS;
+          countryName = 'US';
+          break;
+        case Countries.canada:
+          pattern = RegexPatterns.postalCodeCA;
+          countryName = 'Canadian';
+          value = value!.toUpperCase();
+          break;
+        case Countries.uk:
+          pattern = RegexPatterns.postalCodeUK;
+          countryName = 'UK';
+          value = value!.toUpperCase();
+          break;
+      }
+      final isValid = RegexPatterns.matches(value!, pattern);
+      return isValid
+          ? null
+          : (message ?? 'Please enter a valid $countryName postal code');
     };
   }
 }
