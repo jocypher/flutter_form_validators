@@ -590,4 +590,78 @@ class Validators {
       return RegexPatterns.matches(value, RegexPatterns.ipv6) ? null : message;
     };
   }
+
+  /// Validates IP addresses (both IPv4 and IPv6).
+  ///
+  /// Example:
+  /// ```dart
+  /// TextFormField(
+  ///   validator: Validators.ipAddress(),
+  /// )
+  /// ```
+  static Validator ipAddress(
+      {String message = "Please enter a valid ip Address",
+      bool allowIPV4 = false,
+      bool allowIPV6 = false}) {
+    return (String? value) {
+      if (ValidatorUtilities.isEmpty(value)) return null;
+
+      if (!allowIPV4 && !allowIPV6) {
+        throw ArgumentError("At least one IP version must be allowed");
+      }
+
+      bool isValid = false;
+
+      if (allowIPV4 && RegexPatterns.matches(value!, RegexPatterns.ipv4)) {
+        isValid = true;
+      }
+
+      if (!isValid &&
+          allowIPV6 &&
+          RegexPatterns.matches(value!, RegexPatterns.ipv6)) {
+        isValid = true;
+      }
+
+      return isValid ? null : message;
+    };
+  }
+
+  /// Validates MAC addresses.
+  ///
+  /// Example:
+  /// ```dart
+  /// TextFormField(
+  ///   validator: Validators.macAddress(),
+  /// )
+  /// ```
+  static Validator macAddress({
+    String message = "Please enter a valid MAC address",
+  }) {
+    return (String? value) {
+      if (ValidatorUtilities.isEmpty(value)) return null;
+
+      return RegexPatterns.matches(value, RegexPatterns.macAddress)
+          ? null
+          : message;
+    };
+  }
+
+  /// Validates input for security concerns (XSS, injection, etc.).
+  ///
+  /// Example:
+  /// ```dart
+  /// TextFormField(
+  ///   validator: Validators.secure(),
+  /// )
+  /// ```
+  static Validator secure({
+    String message = 'Input contains potentially harmful content',
+  }) {
+    return (String? value) {
+      if (ValidatorUtilities.isEmpty(value)) return null;
+
+      final result = ValidatorUtilities.validateSecureInput(value);
+      return result.isValid ? null : (message);
+    };
+  }
 }
