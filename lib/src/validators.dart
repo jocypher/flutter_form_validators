@@ -526,4 +526,68 @@ class Validators {
           : (message ?? 'Please enter a valid $countryName postal code');
     };
   }
+
+  /// Validates Social Security Numbers.
+  ///
+  /// Example:
+  /// ```dart
+  /// TextFormField(
+  ///   validator: Validators.ssn(),
+  /// )
+  /// ```
+  static Validator ssn(
+      {String message = "Please enter a valid Social Security Number",
+      bool requiresHyphen = true}) {
+    return (String? value) {
+      if (ValidatorUtilities.isEmpty(value)) return null;
+
+      if (requiresHyphen) {
+        return RegexPatterns.matches(value!, RegexPatterns.ssn)
+            ? null
+            : message;
+      } else {
+        final digits = ValidatorUtilities.extractDigits(value);
+        return digits.length == 9 ? null : message;
+      }
+    };
+  }
+
+  /// Validates IPv4 addresses.
+  ///
+  /// Example:
+  /// ```dart
+  /// TextFormField(
+  ///   validator: Validators.ipv4(),
+  /// )
+  /// ```
+  static Validator ipv4(
+      {String message = "Please enter a valid IPV4 address"}) {
+    return (String? value) {
+      if (ValidatorUtilities.isEmpty(value)) return null;
+
+      return RegexPatterns.matches(value!, RegexPatterns.ipv4) ? null : message;
+    };
+  }
+
+  /// Validates IPv6 addresses with comprehensive format support.
+  ///
+  /// Supports all IPv6 formats including compressed notation,
+  /// loopback, IPv4-mapped, and more.
+  ///
+  /// Example:
+  /// ```dart
+  /// TextFormField(
+  ///   validator: Validators.ipv6(),
+  /// )
+  /// ```
+  ///
+  static Validator ipv6({
+    String message = "Please enter a valid IPV6 address",
+  }) {
+    return (String? value) {
+      if (ValidatorUtilities.isEmpty(value)) return null;
+
+      return RegexPatterns.matches(value, RegexPatterns.ipv6) ? null : message;
+    };
+  }
 }
