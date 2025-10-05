@@ -646,6 +646,9 @@ class Validators {
     };
   }
 
+  /// SECURITY METHODS
+  ///
+
   /// Validates input for security concerns (XSS, injection, etc.).
   ///
   /// Example:
@@ -662,6 +665,116 @@ class Validators {
 
       final result = ValidatorUtilities.validateSecureInput(value);
       return result.isValid ? null : (message);
+    };
+  }
+
+  // UTILITY METHODS
+
+  /// Combines multiple validators into a single validator.
+  /// Returns the first error message encountered, or null if all pass.
+  ///
+  /// Example:
+  /// ```dart
+  /// validator: Validators.combine([
+  ///   Validators.required(),
+  ///   Validators.email(),
+  ///   Validators.minLength(5),
+  /// ])
+  /// ```
+  static Validator combine(List<Validator> validators) {
+    return (String? value) {
+      for (final validator in validators) {
+        final result = validator(value);
+        if (result != null) return result;
+      }
+      return null;
+    };
+  }
+
+  /// Combines validators with AND logic (all must pass).
+  /// Returns a list of all error messages, or null if all pass.
+  static Validator combineAll(List<Validator> validators) {
+    return (String? value) {
+      final errors = <String>[];
+
+      for (final validator in validators) {
+        final result = validator(value);
+        if (result != null) errors.add(result);
+      }
+
+      return errors.isEmpty ? null : errors.join('; ');
+    };
+  }
+
+  /// Creates a conditional validator that only runs if condition is true.
+  ///
+  /// Example:
+  /// ```dart
+  /// validator: Validators.conditional(
+  ///   isRequired,
+  ///   Validators.required(),
+  /// )
+  /// ```
+  static Validator conditional(bool condition, Validator validator) {
+    return (String? value) {
+      if (condition) {
+        return validator(value);
+      }
+      return null;
+    };
+  }
+
+  /// Creates a conditional validator based on another field's value.
+  ///
+  /// Example:
+  /// ```dart
+  /// validator: Validators.conditionalOn(
+  ///   () => typeController.text == 'email',
+  ///   Validators.email(),
+  /// )
+  /// ````
+  static Validator conditionalOn(
+      bool Function() condition, Validator validator) {
+    return (String? value) {
+      return condition() ? validator(value) : null;
+    };
+  }
+
+  /// Creates a custom validator from a simple boolean function.
+  ///
+  /// Example:
+  /// ```dart
+  /// validator: Validators.custom(
+  ///   (value) => value?.startsWith('test') ?? false,
+  ///   'Value must start with "test"',
+  /// )
+  /// ```
+  static Validator custom(
+    bool Function(String? value) test,
+    String message,
+  ) {
+    return (String? value) {
+      return test(value) ? null : message;
+    };
+  }
+
+  /// Creates an advanced custom validator that returns a ValidationResult.
+  ///
+  /// Example:
+  /// ```dart
+  /// validator: Validators.advancedCustom((value) {
+  ///   if (value == null) return ValidationResult.valid();
+  ///   if (value.contains('bad')) {
+  ///     return ValidationResult.invalid('Contains forbidden word');
+  ///   }
+  ///   return ValidationResult.valid();
+  /// })
+  /// ```
+  static Validator advancedCustom(
+      ValidationResult Function(String? value) test) {
+    return (String? value) {
+      final result = test(value);
+      return result.isValid ? null : result.errorMessage;
     };
   }
 }
