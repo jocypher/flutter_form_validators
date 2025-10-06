@@ -151,3 +151,7 @@ export 'src/utils/luhn_algorithm.dart';
 export 'src/enums/card_type.dart' show CreditCardType;
 export 'src/regex_patterns.dart';
 export 'src/extensions.dart' show CreditCardTypeExtension;
+export 'src/enums/countries.dart';
+export 'src/enums/date_format.dart';
+export 'src/enums/phone_regions.dart';
+export 'src/utils/validator_utilities.dart';

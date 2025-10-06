@@ -1,8 +1,4 @@
 import 'package:flutter_form_validators/flutter_form_validators.dart';
-import 'package:flutter_form_validators/src/enums/countries.dart';
-import 'package:flutter_form_validators/src/enums/date_format.dart';
-import 'package:flutter_form_validators/src/enums/phone_regions.dart';
-import 'package:flutter_form_validators/src/utils/validator_utilities.dart';
 
 /// A function that represents a form field validator.
 /// It takes in a string value and returns a string error message if validation fails,
@@ -176,21 +172,42 @@ class Validators {
   ///   validator: Validators.url(requireHttps: true),
   /// )
   /// ```
-  static Validator url(
-      {String message = "Please enter a valid url",
-      bool allowHttps = false,
-      bool allowLocalhost = true}) {
+  static Validator url({
+    String message = "Please enter a valid URL",
+    bool allowHttps = false,
+    bool allowLocalhost = true,
+  }) {
     return (String? value) {
       if (ValidatorUtilities.isEmpty(value)) return null;
+      value = value!.trim();
 
-      if (allowHttps && !value!.startsWith("https://")) {
-        return 'URL must use HTTPS';
+      // Must start with http:// or https://
+      if (!value.startsWith('http://') && !value.startsWith('https://')) {
+        return message; // invalid format
       }
-      if (!allowLocalhost && value!.contains("localhost")) {
+
+      // Allow only real localhost addresses
+      if (allowLocalhost &&
+          (value.startsWith('http://localhost') ||
+              value.startsWith('http://127.0.0.1') ||
+              value.startsWith('http://[::1]'))) {
+        return null; // valid localhost
+      }
+
+      // If https not allowed
+      if (!allowHttps && value.startsWith('https://')) {
+        return 'HTTPS URLs are not allowed';
+      }
+
+      // If localhost not allowed
+      if (!allowLocalhost &&
+          (value.contains('localhost') || value.contains('127.0.0.1'))) {
         return 'Localhost URLs are not allowed';
       }
 
-      return RegexPatterns.matches(value, RegexPatterns.url) ? null : message;
+      final urlPattern = RegExp(RegexPatterns.url);
+
+      return urlPattern.hasMatch(value) ? null : message;
     };
   }
 

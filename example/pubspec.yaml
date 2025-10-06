@@ -1,0 +1,24 @@
+name: flutter_form_validators_example
+description: Example app demonstrating flutter_form_validators package
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # Reference your package from parent directory
+  flutter_form_validators:
+    path: ../
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
