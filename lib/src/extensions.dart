@@ -105,14 +105,14 @@ extension StringValidationExtension on String? {
   // returns true if the string is a positive number
   bool get isPositive {
     if (!isNumeric) return false;
-    double number = double.parse(this!);
+    final double number = double.parse(this!);
     return number >= 0;
   }
 
   // returns true if the string is a negative number
   bool get isNegative {
     if (!isNumeric) return false;
-    double number = double.parse(this!);
+    final double number = double.parse(this!);
     return number < 0;
   }
 

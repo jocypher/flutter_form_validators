@@ -25,7 +25,7 @@ class LuhnAlgorithm {
     if (cardNumber.isEmpty) return false;
 
     // remove all non-digit characters
-    String cleaned = _cleanedNumber(cardNumber);
+    final String cleaned = _cleanedNumber(cardNumber);
 
     // must be at least 2 digits and all digits
     if (cleaned.length < 2 || !_isAllDigits(cleaned)) {
@@ -77,7 +77,7 @@ class LuhnAlgorithm {
     }
 
     /// calculate sum for partial numbers (treating it as if check digit is 0)
-    int sum = _calculateLuhnSum('${cleaned}0');
+    final int sum = _calculateLuhnSum('${cleaned}0');
 
     // The check digit is what we need to add to make sum divisible by 10
     return (10 - (sum % 10)) % 10;
@@ -95,7 +95,7 @@ class LuhnAlgorithm {
 
   /// performs the Luhn algorithm check on the cleaned string
   static bool _luhnCheck(String cleaned) {
-    int sum = _calculateLuhnSum(cleaned);
+    final int sum = _calculateLuhnSum(cleaned);
     return sum % 10 == 0;
   }
 
@@ -165,7 +165,8 @@ class LuhnAlgorithm {
     // Generate random digits to fill the length minus the prefix and check digit
     final random = DateTime.now().millisecondsSinceEpoch;
     String middle = '';
-    int remainingLength = length - prefix.length - 1; // -1 for check digit
+    final int remainingLength =
+        length - prefix.length - 1; // -1 for check digit
 
     for (int i = 0; i < remainingLength; i++) {
       middle += ((random + i) % 10).toString();

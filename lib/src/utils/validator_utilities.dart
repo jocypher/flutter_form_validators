@@ -26,7 +26,7 @@ class ValidatorUtilities {
   static String normalized(String? value, {bool toLowerCase = false}) {
     if (value == null) return '';
 
-    String normalized = value.trim().replaceAll(RegExp(r'\s+'), ' ');
+    final String normalized = value.trim().replaceAll(RegExp(r'\s+'), ' ');
     return toLowerCase ? normalized.toLowerCase() : normalized;
   }
 
@@ -175,7 +175,7 @@ class ValidatorUtilities {
       return ValidationResult.valid();
     }
 
-    List<String> errors = [];
+    final List<String> errors = [];
 
     // length check
     final lengthResult = validateLength(value, minLength, maxLength);
@@ -251,8 +251,8 @@ class ValidatorUtilities {
     bool descending = true;
 
     for (int i = 1; i < str.length; i++) {
-      int current = str.codeUnitAt(i);
-      int previous = str.codeUnitAt(i - 1);
+      final int current = str.codeUnitAt(i);
+      final int previous = str.codeUnitAt(i - 1);
 
       if (current != previous + 1) ascending = false;
       if (current != previous - 1) descending = false;
