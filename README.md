@@ -1,6 +1,6 @@
-# Flutter Form Validators
+# Flutter Form Validators Plus
 
-[![pub package](https://img.shields.io/pub/v/flutter_form_validators.svg)](https://pub.dev/packages/flutter_form_validators)
+[![pub package](https://img.shields.io/pub/v/form_validators_plus.svg)](https://pub.dev/packages/form_validators_plus)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A comprehensive, production-ready form validation library for Flutter with 20+ validators, security features, and 40+ string extensions.
