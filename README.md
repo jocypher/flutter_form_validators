@@ -20,7 +20,7 @@ A comprehensive, production-ready form validation library for Flutter with 20+ v
 Add to your `pubspec.yaml`:
 ```yaml
 dependencies:
-  flutter_form_validators: ^1.0.0
+  form_validators_plus: ^1.0.0
 ```
 
 Then run:
