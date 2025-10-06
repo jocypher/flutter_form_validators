@@ -1,5 +1,5 @@
 name: flutter_form_validators
-description: "A new Flutter package project."
+description: A flexible Flutter and Dart validation library with ready-to-use rules and utilities
 version: 1.0.0
 homepage: https://github.com/jocypher/flutter_form_validators
 repository: https://github.com/jocypher/flutter_form_validators
