@@ -193,6 +193,20 @@ Run tests:
 flutter test
 ```
 
+## 📸 Screenshots
+
+### Registration Form
+![Registration Form](example/screenshots/registration_form.png)
+
+### Credit Card Validator
+![Credit Card](example/screenshots/credit_card_validation.png)
+
+### Password Strength Analyzer
+![Password Strength](example/screenshots/password_strength.png)
+
+### String extensions
+![Password Strength](example/screenshots/string_extensions.png)
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
