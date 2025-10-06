@@ -1,7 +1,7 @@
 // example/lib/main.dart
 
 import 'package:flutter/material.dart';
-import 'package:flutter_form_validators/flutter_form_validators.dart';
+import 'package:form_validators_plus/form_validators_plus.dart';
 
 void main() {
   runApp(const MyApp());

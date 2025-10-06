@@ -1,4 +1,4 @@
-import 'package:flutter_form_validators/flutter_form_validators.dart';
+import 'package:form_validators_plus/form_validators_plus.dart';
 
 /// Extension to provide validLengths and prefixes for CreditCardType.
 extension CreditCardTypeUtils on CreditCardType {

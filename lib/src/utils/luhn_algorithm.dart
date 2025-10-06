@@ -1,4 +1,4 @@
-import 'package:flutter_form_validators/src/enums/card_type.dart';
+import 'package:form_validators_plus/form_validators_plus.dart';
 
 /// Implementation of the Luhn algorithm for credit card validation.
 ///

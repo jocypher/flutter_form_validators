@@ -1,4 +1,4 @@
-import 'package:flutter_form_validators/flutter_form_validators.dart';
+import 'package:form_validators_plus/form_validators_plus.dart';
 
 /// A function that represents a form field validator.
 /// It takes in a string value and returns a string error message if validation fails,

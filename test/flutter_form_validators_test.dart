@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_form_validators/flutter_form_validators.dart';
+import 'package:form_validators_plus/form_validators_plus.dart';
 
 void main() {
   group('Basic Validators', () {

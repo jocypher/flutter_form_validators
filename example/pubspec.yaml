@@ -1,4 +1,4 @@
-name: flutter_form_validators_example
+name: form_validators_plus_example
 description: Example app demonstrating flutter_form_validators package
 publish_to: 'none'
 
@@ -12,7 +12,7 @@ dependencies:
     sdk: flutter
   
   # Reference your package from parent directory
-  flutter_form_validators:
+  form_validators_plus:
     path: ../
 
 dev_dependencies:
